@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1,2,3 Lets Play - Online Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+
+    body {
+      background:
+        linear-gradient(rgba(10,10,25,0.85), rgba(10,10,25,0.95)),
+        url('https://images.unsplash.com/photo-1605902711622-cfb43c44367f');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color:#fff;
+      transition:0.4s;
+    }
+
+    body.dark { background:#0a0a15; color:#ddd; }
+    body.dark .game-card { background:#111; border-color:#ff00cc; }
+    body.dark header { background:#070712; }
+
+    header {
+      padding:20px;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+      background: linear-gradient(135deg,#0f0f1f,#15153a);
+      border-bottom:1px solid rgba(0,240,255,0.2);
+    }
+
+    header h1 { font-size:2rem; color:#00f0ff; margin-bottom:10px; }
+
+    .toggle-btn {
+      background:#00f0ff;
+      border:none;
+      padding:6px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .hero {
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      height:260px;
+      padding:0 20px;
+      background:
+        linear-gradient(rgba(15,15,40,0.75), rgba(15,15,40,0.9)),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e');
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero h2 { font-size:2rem; color:#00f0ff; margin-bottom:12px; letter-spacing:0.5px; }
+    .hero p { max-width:720px; line-height:1.6; font-size:15px; opacity:0.95; }
+
+    .tabs { display:flex; justify-content:center; margin:15px 0; }
+
+    .tabs button {
+      background:#0f0f1f;
+      border:2px solid #00f0ff;
+      color:#00f0ff;
+      padding:8px 16px;
+      margin:0 5px;
+      cursor:pointer;
+      border-radius:5px;
+      transition:0.3s;
+    }
+
+    .tabs button.active, .tabs button:hover { background:#00f0ff; color:#0f0f1f; }
+
+    .games-container {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap:20px;
+      padding:20px;
+      max-width:1100px;
+      margin:auto;
+    }
+
+    .game-card {
+      background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1511512578047-dfb367046420');
+      background-size:cover;
+      border:2px solid #00f0ff;
+      border-radius:10px;
+      text-align:center;
+      transition:0.3s;
+    }
+
+    .game-card:hover { transform: scale(1.06); box-shadow:0 0 20px #00f0ff; }
+
+    .game-card img {
+      width:100%;
+      height:130px;
+      object-fit:cover;
+      border-top-left-radius:10px;
+      border-top-right-radius:10px;
+    }
+
+    .game-card h4 { padding:10px 5px; }
+
+    .game-card a {
+      display:inline-block;
+      margin:10px 0 15px;
+      padding:8px 15px;
+      background:#00f0ff;
+      color:#0f0f1f;
+      border-radius:5px;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position:relative;
+      padding:20px;
+      margin-top:20px;
+      background:#0f0f1f;
+      border-top:1px solid rgba(0,240,255,0.2);
+      font-size:14px;
+      opacity:0.85;
+    }
+
+    .footer-left { text-align:center; }
+
+    .footer-right {
+      position:absolute;
+      right:20px;
+      bottom:10px;
+      text-align:right;
+      font-size:13px;
+      opacity:0.9;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>1.2.3 Let's Play 🎮</h1>
+  <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
+</header>
+
+<section class="hero">
+  <h2>Discover, Click & Play Instantly</h2>
+  <p>
+    Welcome to <strong>1.2.3 Lets Play</strong> — your one-stop hub to explore
+    both Premium and Free online games. Easily find your favorite titles,
+    jump into the action, and enjoy smooth gaming anytime, anywhere.
+  </p>
+</section>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showGames('premium')">Premium Games</button>
+  <button class="tab-btn" onclick="showGames('free')">Free Games</button>
+</div>
+
+<section class="games-container" id="gamesContainer"></section>
+
+<footer>
+  <div class="footer-left">
+    Created by Nazeha Mosharaf | © 2026
+  </div>
+
+  <div class="footer-right">
+    Email: nazehamosharaf23@gmail.com <br>
+    Address: Feni, Bangladesh
+  </div>
+</footer>
+
+<script>
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+const premiumGames = [
+  { title:'Slither.io', img:'slither.jpeg', link:'https://slither.io/' },
+  { title:'Agonia RPG', img:'Agonia.jpeg', link:'https://bbogd.com/game/agonia' },
+  { title:'Ninja RPG', img:'Ninja.jpeg', link:'https://bbogd.com/game/the-ninja-rpg' },
+  { title:'Grail Lords', img:'Grail.jpeg', link:'https://bbogd.com/game/the-grail-lords' },
+  { title:'Prison Struggle', img:'Prison.jpeg', link:'https://bbogd.com/game/prison-struggle' },
+  { title:'Rocking Soccer', img:'Rocking.jpeg', link:'https://bbogd.com/game/rocking-soccer' },
+  { title:'Racing Career', img:'Racing.jpeg', link:'https://bbogd.com/game/my-racing-career' },
+  { title:'PirateQuest RPG', img:'Pirate.jpeg', link:'https://bbogd.com/game/piratequest-rpg' },
+  { title:'Prisonblock RPG', img:'Prisonblock.jpeg', link:'https://bbogd.com/game/prisonblock' },
+  { title:'Earth Empires', img:'earth.jpeg', link:'https://bbogd.com/game/earth-empires' },
+  { title:'Diep.io', img:'deip.jpeg', link:'https://diep.io/' },
+  { title:'Krunker.io', img:'krunker.jpeg', link:'https://krunker.io/' },
+  { title:'Starblast.io', img:'starblast.jpeg', link:'https://starblast.io/' },
+  { title:'Paper.io 2', img:'paper.jpeg', link:'https://paper-io.com/paper-io-2' },
+  { title:'ZombsRoyale.io', img:'zombs.jpeg', link:'https://zombsroyale.io/' },
+  { title:'Hole.io', img:'hole.jpeg', link:'https://www.holeio.com/' },
+  { title:'Agar.io', img:'agar.jpeg', link:'https://agar.io/' },
+  { title:'Moto X3M', img:'moto.jpeg', link:'https://moto-x3m.io/' },
+  { title:'Geometry Dash Subzero', img:'geometry.jpeg', link:'https://geometrydash.io/subzero' },
+  { title:'Tetris Classic', img:'teris.jpeg', link:'https://tetr.io/' },
+  { title:'Superhex.io', img:'superx.jpeg', link:'https://superhex.io/' },
+];
+
+const freeGames = [
+  { title:'Among Us Online', img:'among.jpeg', link:'https://amongus-online.net' },
+  { title:'Crazy Games Arcade', img:'crazy.jpeg', link:'https://www.crazygames.com/' },
+  { title:'Slime Clicker', img:'slime.jpeg', link:'https://www.crazygames.com/game/slime-clicker' },
+  { title:'Puzzle Game', img:'puzzle.jpeg', link:'https://www.crazygames.com/game/daily-puzzle' },
+  { title:'Farm Builder', img:'farm.jpeg', link:'https://en.upjers.com/my-free-farm-2' },
+  { title:'Uptasia', img:'uptasia.jpeg', link:'https://en.upjers.com/uptasia' },
+  { title:'Zoo-2:Animal Park', img:'zoo.jpeg', link:'https://en.upjers.com/zoo-2-animal-park' },
+  { title:'Obby:Boxer', img:'boxer.jpeg', link:'https://www.crazygames.com/game/obby-boxer' },
+  { title:'Traffic-Tour', img:'traffic.jpeg', link:'https://www.play123.com/game/traffic-tour' },
+  { title:'Gartic Phone', img:'gartic.jpeg', link:'https://garticphone.com/' },
+  { title:'Merge Fruits', img:'merge.jpeg', link:'https://www.crazygames.com/game/merge-fruits' },
+  { title:'Bubble Shooter-Classic', img:'bubble.jpeg', link:'https://www.crazygames.com/game/bubble-shooter-classic' },
+  { title:'Stickman World War', img:'stickman.jpeg', link:'https://www.crazygames.com/game/stickman-world-war' },
+  { title:'Memory Cards', img:'memory.jpeg', link:'https://www.crazygames.com/game/memory-cards-sni' },
+  { title:'Screw Out:Bolts&Nuts', img:'screw.jpeg', link:'https://www.crazygames.com/game/screw-out-bolts-and-nuts' },
+  { title:'Tower Defense', img:'tower.jpeg', link:'https://www.crazygames.com/game/tower-defense' }
+];
+
+function showGames(type){
+  const container = document.getElementById('gamesContainer');
+  container.innerHTML = '';
+  const games = type==='premium'? premiumGames : freeGames;
+
+  games.forEach(game=>{
+    const card = document.createElement('div');
+    card.classList.add('game-card');
+    card.innerHTML = `
+      <img src="${game.img}" alt="${game.title}">
+      <h4>${game.title}</h4>
+      <a href="${game.link}" target="_blank">Play</a>
+    `;
+    container.appendChild(card);
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active'));
+  document.querySelector(`.tab-btn[onclick="showGames('${type}')"]`).classList.add('active');
+}
+
+showGames('premium');
+</script>
+
+</body>
+</html>
